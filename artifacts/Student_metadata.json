@@ -293,11 +293,11 @@
 	},
 	"sources": {
 		"contracts/Student.sol": {
-			"keccak256": "0xc3d585d29807a91d97bae988b099a1095adb7861725c304f6216c1785300c8f3",
-			"license": "GPL-3.0",
+			"keccak256": "0x080b94fb728573b3fc23d396b627554b5dd7d9581dcc65429c24771991ef844d",
+			"license": "Unlicence",
 			"urls": [
-				"bzz-raw://64eeb1759cb9e6f17a12b8e1c6f0af323b6c954b920349e1cd62557e2a483518",
-				"dweb:/ipfs/QmR4uivbKsRbV8wutw7k8677PNWG94oDa2pn2E3YPBUfbD"
+				"bzz-raw://a4a29ae34e20b9cf2d03d1cb0a23e33e225f1a3dad5b787f542414f0ade2a466",
+				"dweb:/ipfs/QmYcdY3ZgfHtfp7tJjmbECyH21bA3gQfQZUqQDrP9JMKDR"
 			]
 		}
 	},
