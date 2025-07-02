@@ -144,6 +144,61 @@
 				"type": "event"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_paymentID",
+						"type": "uint256"
+					}
+				],
+				"name": "cancelPayment",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
+					}
+				],
+				"name": "createPayment",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_paymentID",
+						"type": "uint256"
+					}
+				],
+				"name": "executePayment",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "nextPaymentID",
 				"outputs": [
@@ -358,11 +413,11 @@
 			]
 		},
 		"contracts/ERC20Token.sol": {
-			"keccak256": "0x393c01e8b1b641d6faa80c0c8439763a9afcf5803e36e0b9e7f8bd19363dcc0c",
+			"keccak256": "0x2b02b6aa5dff1c5a809df20c41c40e3f5fa5b3c116f780232566a826f532779c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://67cae6fced0fa4b06f117893d9c266191e110f8ba8504a7b368fb501a5e932fa",
-				"dweb:/ipfs/QmZWsFZPBjnqQUr4rKAyv5Gbz8pyp2LQV5QiPNpjhMAPTs"
+				"bzz-raw://3e61981023443680a926e349852c46164a88f98202ff7b66be23df28f723a027",
+				"dweb:/ipfs/QmXL3sjWgnKQZH9P7paKW78af1PrxXeHNNULtZFZaSNcMX"
 			]
 		}
 	},

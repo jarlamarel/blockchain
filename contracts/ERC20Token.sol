@@ -60,4 +60,79 @@ contract ERC20Token is Ownable, ReentrancyGuard {
         paymentToken = IERC20(_paymentToken);
         nextPaymentID = 1;
     }
+
+     function createPayment(
+        address _recipient,
+        uint256 _amount,
+        string memory _description
+    ) external returns (uint256) {
+        require(_recipient != address(0), "Invalid recipient");
+        require(_amount > 0, "Balance should be over 0");
+        require(bytes(_description).length > 0, "Description required");
+        
+        uint256 paymentID = nextPaymentID;
+        nextPaymentID++;
+        
+        payments[paymentID] = Payment({
+            payer: msg.sender,
+            recipient: _recipient,
+            amount: _amount,
+            description: _description,
+            isPaid: false,
+            timestamp: block.timestamp
+        });
+        
+        userPayments[msg.sender].push(paymentID);
+        userPayments[_recipient].push(paymentID);
+        
+        emit PaymentCreated(paymentID, msg.sender, _recipient, _amount, _description);
+        
+        return paymentID;
+    }
+
+    function executePayment(uint256 _paymentID) 
+        external 
+        validPaymentID(_paymentID)
+        nonReentrant 
+    {
+        Payment storage payment = payments[_paymentID];
+        
+        require(!payment.isPaid, "Payment already done");
+        require(msg.sender == payment.payer, "Only the payer can do this action");
+        
+        require(
+            paymentToken.balanceOf(msg.sender) >= payment.amount,
+            "Balance too low"
+        );
+        
+        require(
+            paymentToken.allowance(msg.sender, address(this)) >= payment.amount,
+            "Insufficient allowance"
+        );
+        
+        payment.isPaid = true;
+        
+        bool success = paymentToken.transferFrom(
+            msg.sender,
+            payment.recipient,
+            payment.amount
+        );
+        
+        require(success, "Transfet failure");
+        
+        emit PaymentExecuted(_paymentID, msg.sender, payment.recipient, payment.amount);
+    }
+
+    function cancelPayment(uint256 _paymentID) 
+        external 
+        validPaymentID(_paymentID)
+        onlyPayerOrRecipient(_paymentID)
+    {
+        Payment storage payment = payments[_paymentID];
+        require(!payment.isPaid, "Can't cancel already done payments.");
+        
+        payment.amount = 0;
+        
+        emit PaymentCancelled(_paymentID);
+    }
 }
